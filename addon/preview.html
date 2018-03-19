@@ -1,0 +1,32 @@
+﻿<title></title>
+<link rel="manifest" href="manifest.json">
+<header>
+    <link rel="stylesheet" type="text/css" href="css/preview.css" />
+    <img id="btn-recordings-list" src="images/list-icon.png" title="Upload">
+    <img id="btn-upload" src="images/upload-icon.png" title="Upload">
+    <p>
+        <a id="file-name" title="Download on your Disk!"></a>
+        (Size: <span id="file-size"></span>)
+        <!--
+        Duration: <span id="file-duration">00:00</span>
+        -->
+    </p>
+    <span style="font-size: 17px">This file is in your <b>browser cache</b>. Click above link to <b>download</b>.</span>
+</header>
+
+<div id="btn-upload-dropdown">
+  <div id="btn-php-upload">Upload to Private Server</div>
+  <div id="btn-youtube-upload">Upload to YouTube</div>
+</div>
+
+<div id="btn-recordings-list-dropdown"></div>
+
+<section style="text-align: center;">
+  <video controls disable-contextmenu cf-video-load="file"></video>
+</section>
+
+<script src="modules/Storage.js"></script>
+<script src="js/common.js"></script>
+<script src="js/preview/preview.js"></script>
+<script src="js/preview/preview.php.upload.js"></script>
+<script src="js/preview/preview.youtube.upload.js"></script>
