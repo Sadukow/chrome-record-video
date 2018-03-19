@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Untitled Screencast - Screencastify</title>
+    <link rel="stylesheet" href="css/app.css">
+	<script src="js/app.js"></script>
+</head>
+<body class="app layout-fill layout-row">
+
+	<div class="view layout-column flex" flex="" layout="column">
+		<div flex="" layout="row" class="file-detail layout-row flex">
+			<div layout="column" flex="" class="layout-column flex">
+				<div class="header">	
+					<div class="md-toolbar-tools">
+						<button class="md-icon-button md-button md-ink-ripple" type="button">
+							<md-icon class="material-icons">menu</md-icon>
+						</button>
+						<h1 class="file-title" id="videoTitle" role="button" tabindex="0"></h1>
+						<div flex="" class="flex"></div>
+						<button id="buttonLib" class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Crop/Trim">
+							<md-icon class="material-icons">video_library</md-icon>
+						</button>
+						<button id="buttonSave" class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Save to Disk" >
+							<md-icon class="material-icons">file_download</md-icon>
+						</button>
+						<button id="buttonCrop" class="md-icon-button md-button md-ink-ripple" type="button" aria-label="Crop/Trim" >
+							<md-icon class="material-icons">crop</md-icon>
+						</button>
+						<button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" ng-click="fileActionsCtrl.remove(file, $event)" aria-label="delete">
+							<md-icon class="material-icons">delete</md-icon>
+						</button>
+					</div>
+				</div>
+				<div class="video-wrapped flex">
+					<video id="videoContainer" controls="" disable-contextmenu="" cf-video-load="file" class="video-container" src=""></video>
+					<div id="blockCrop" class="crop-block">
+						<div class="overlay top"></div> 
+						<div class="overlay bottom"></div> 
+						<div class="overlay left"></div> 
+						<div class="overlay right"></div> 
+						<div class="crop-box"> 
+							<div class="dimension-info"></div> 
+							<div class="move-handle" style="touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div> 
+							<div class="crop-box-outer"> 
+								<div class="handle top-left" style="touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div> 
+								<div class="handle top-right" style="touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div> 
+								<div class="handle bottom-left" style="touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div> 
+								<div class="handle bottom-right" style="touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div> 
+							</div> 
+							<div id="loadingIndicator" class="loading-indicator">
+								<div class="text_loading">Loading...</div>
+							</div>
+						</div>
+						
+						<div id="actionCrop" class="edit-actions layout-row"> 
+							<div class="edit-actions-ripple" >
+								<button id="buttonCropCancel" class="md-button md-ink-ripple" type="button" aria-label="Cancel">
+									<span>Cancel</span>
+								</button> 
+								<button  id="buttonCropSave" class="md-primary md-button md-ink-ripple" type="button" aria-label="Save Edit" disabled="disabled">
+									<span>Save Edit</span>
+								</button> 
+							</div>
+						</div>						
+						
+					</div>	
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>
+

@@ -7,9 +7,8 @@
          "js/background/getUserMedia.js", 
          "js/background/desktopCapture.js", 
          "js/background/badgeText.js", 
-         "modules/MediaStreamRecorder.js", 
-         "modules/MultiStreamRecorder.js",
-         "modules/Storage.js" 
+         "modules/RecordRTC.min.js",
+         "modules/StorageDB.js" 
       ]
    },
    "browser_action": {
@@ -17,7 +16,7 @@
       "default_popup": "popup.html",
       "default_title": "Record Your Screen, Tab or Camera"
    },
-   "description": "Microphone + Screen + Camera - MediaStreamRecorder",
+   "description": "Microphone + Screen + Camera - RecordRTC",
    "icons": {
       "128": "images/main-icon.png",
       "16": "images/main-icon.png",
@@ -29,12 +28,15 @@
    "minimum_chrome_version": "49",
    "name": "RecordVideo",
    "permissions": [  "desktopCapture", 
+                     "downloads",
                      "storage", 
+                     "unlimitedStorage",
                      "tabs", 
                      "tabCapture", 
                      "activeTab", 
                      "identity" 
                   ],
    "short_name": "RecordVideo",
-   "version": "1.0.1"
+   "version": "1.0.2"
 }
+

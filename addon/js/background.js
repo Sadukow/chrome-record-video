@@ -35,6 +35,7 @@ chrome.runtime.onConnect.addListener(function(port) {
             console.log(recorder);
 
             if (recorder && recorder.streams) {
+
                 recorder.streams.forEach(function(stream, idx) {
                     stream.getTracks().forEach(function(track) {
                         track.stop();
@@ -44,6 +45,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                         stream.onended();
                     }
                 });
+
 
                 recorder.streams = null;
             }
@@ -66,7 +68,6 @@ function gotStream(stream) {
     var options = {
         type: 'video',
         disableLogs: false,
-        recorderType: MediaStreamRecorder // StereoAudioRecorder
     };
 
     if (!videoCodec) {
@@ -120,10 +121,10 @@ function gotStream(stream) {
     // fix https://github.com/muaz-khan/RecordRTC/issues/281
     options.ignoreMutedMedia = false;
 
-    // -------------------- MediaStreamRecorder ----------------------------------
-    console.log('====MediaStreamRecorder====');
+    console.log('====RecordRTC====');
 
     if (cameraStream && cameraStream.getVideoTracks().length) {
+
         // adjust video on top over screen
 
         // on faster systems (i.e. 4MB or higher RAM):
@@ -142,14 +143,22 @@ function gotStream(stream) {
         // frame-rates
         options.frameInterval = 1;
 
-        recorder = new MultiStreamRecorder([cameraStream, stream], options);
+        recorder = new MRecordRTC(stream);
+        //recorder.addStream(stream);
+        //recorder.addStream(cameraStream);
+
+
+        recorder.startRecording();
+
         recorder.streams = [stream, cameraStream];
     } else {
-        recorder = new MediaStreamRecorder(stream, options);
+        recorder = RecordRTC(stream, options);
+        recorder.startRecording();
+
         recorder.streams = [stream];
     }
 
-    recorder.record();
+    //recorder.record();
 
     isRecording = true;
     onRecording();
@@ -178,6 +187,7 @@ function gotStream(stream) {
     timer = setInterval(checkTime, 100);
 }
 
+
 // --------------------------------------------------------------
 function stopScreenRecording() {
 
@@ -185,7 +195,8 @@ function stopScreenRecording() {
 
     isRecording = false;
 
-    recorder.stop(function() {
+    recorder.stopRecording(function (url, type) {
+
         var mimeType = 'video/webm';
         var fileExtension = 'webm';
 
@@ -207,12 +218,7 @@ function stopScreenRecording() {
             type: mimeType
         });
 
-
-        DiskStorage.StoreFile(file, function() {
-            chrome.tabs.create({
-                url: 'preview.html'
-            });
-        });
+        chrome.tabs.create({url: "app.html#/files/"+encodeURIComponent(url)+'/'+encodeURIComponent(file.name)}, function (tab) {     }); 
 
         // invokeSaveAsDialog(file, file.name);
 
@@ -232,6 +238,8 @@ function stopScreenRecording() {
         chrome.storage.sync.set({
             isRecording: 'false' // FALSE
         });
+
+        
     });
 
     if (timer) {
