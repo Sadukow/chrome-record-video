@@ -42,6 +42,8 @@ window.addEventListener( "load", function(){
             enableTabCaptureAPI: 'false',
             enableMicrophone: 'true', // TRUE
             enableCamera: 'true', // TRUE
+//            enableMicrophone: 'false', // TRUE
+//            enableCamera: 'false', // TRUE
             enableScreen: 'true', // TRUE
             isRecording: 'true', // TRUE
             enableSpeakers: 'false'

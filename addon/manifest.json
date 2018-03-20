@@ -3,11 +3,12 @@
       "persistent": false,
       "scripts": [ 
          "js/common.js", 
+         "modules/FilesSystem.js", 
+         "modules/naclRecorder.js",
          "js/background.js", 
          "js/background/getUserMedia.js", 
          "js/background/desktopCapture.js", 
          "js/background/badgeText.js", 
-         "modules/FilesSystem.js", 
          "modules/DiskStorage.js" 
       ]
    },
@@ -37,6 +38,6 @@
                      "identity" 
                   ],
    "short_name": "RecordVideo",
-   "version": "1.0.2"
+   "version": "1.0.3"
 }
 

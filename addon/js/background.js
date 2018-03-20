@@ -1,3 +1,6 @@
+var FileSystem = new FILESYSTEM();
+var Nacl = new NACL_RECORDER();
+
 
 chrome.storage.sync.set({
     isRecording: 'false' // FALSE
@@ -8,6 +11,9 @@ chrome.browserAction.setIcon({
 });
 
 var runtimePort;
+
+var fileName = null;
+var fileExtension = null;
 
 chrome.runtime.onConnect.addListener(function(port) {
     runtimePort = port;
@@ -32,23 +38,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 
         if (message.stopRecording) {
 
-            console.log(recorder);
-
-            if (recorder && recorder.streams) {
-
-                recorder.streams.forEach(function(stream, idx) {
-                    stream.getTracks().forEach(function(track) {
-                        track.stop();
-                    });
-
-                    if (idx == 0 && typeof stream.onended === 'function') {
-                        stream.onended();
-                    }
-                });
-
-
-                recorder.streams = null;
-            }
+            stopScreenRecording()
 
             isRecording = false;
             setBadgeText('');
@@ -74,6 +64,8 @@ function gotStream(stream) {
         videoCodec = 'Default'; // prefer VP9 by default
     }
 
+    fileExtension = 'webm';
+
     if (videoCodec) {
         if (videoCodec === 'Default') {
             options.mimeType = 'video/webm\;codecs=vp9';
@@ -90,12 +82,14 @@ function gotStream(stream) {
         if (videoCodec === 'H264') {
             if (isMimeTypeSupported('video/webm\;codecs=h264')) {
                 options.mimeType = 'video/webm\;codecs=h264';
+                fileExtension = 'mp4';
             }
         }
 
         if (videoCodec === 'MKV') {
             if (isMimeTypeSupported('video/x-matroska;codecs=avc1')) {
                 options.mimeType = 'video/x-matroska;codecs=avc1';
+                fileExtension = 'mkv';
             }
         }
     }
@@ -118,10 +112,12 @@ function gotStream(stream) {
         });
     }
 
-    // fix https://github.com/muaz-khan/RecordRTC/issues/281
     options.ignoreMutedMedia = false;
 
-    console.log('====RecordRTC====');
+
+    fileName = getFileName(fileExtension);
+
+    console.log('====NACL====', fileName);
 
     if (cameraStream && cameraStream.getVideoTracks().length) {
 
@@ -143,45 +139,29 @@ function gotStream(stream) {
         // frame-rates
         options.frameInterval = 1;
 
-        recorder = new MRecordRTC(stream);
-        //recorder.addStream(stream);
-        //recorder.addStream(cameraStream);
+        Nacl.capture(stream, fileName);
+
+        //recorder = new MRecordRTC(stream);
 
 
-        recorder.startRecording();
+        //recorder.startRecording();
 
-        recorder.streams = [stream, cameraStream];
-    } else {
-        recorder = RecordRTC(stream, options);
-        recorder.startRecording();
+        //recorder.streams = [stream, cameraStream];
+    } 
+    else {
+        //recorder = RecordRTC(stream, options);
+        //recorder.startRecording();
 
-        recorder.streams = [stream];
+        Nacl.capture(stream, fileName);
+
+
+        //recorder.streams = [stream];
     }
 
     //recorder.record();
 
     isRecording = true;
     onRecording();
-
-    recorder.streams[0].onended = function() {
-        if (recorder && recorder.streams.length) {
-            recorder.streams[0].onended = null;
-        }
-
-        stopScreenRecording();
-    };
-
-    if (recorder.streams[0].getVideoTracks().length) {
-        recorder.streams[0].getVideoTracks().forEach(function(track) {
-            track.onended = function() {
-                if (!recorder) return;
-                var stream = recorder.streams[0];
-                if (!stream || typeof stream.onended !== 'function') return;
-
-                stream.onended();
-            };
-        });
-    }
 
     initialTime = Date.now()
     timer = setInterval(checkTime, 100);
@@ -195,36 +175,12 @@ function stopScreenRecording() {
 
     isRecording = false;
 
-    recorder.stopRecording(function (url, type) {
+    Nacl.stop(function(url, fn){
 
-        var mimeType = 'video/webm';
-        var fileExtension = 'webm';
-
-        if (videoCodec === 'H264') {
-            if (isMimeTypeSupported('video/webm\;codecs=h264')) {
-                mimeType = 'video/mp4';
-                fileExtension = 'mp4';
-            }
-        }
-
-        if (videoCodec === 'MKV') {
-            if (isMimeTypeSupported('video/x-matroska;codecs=avc1')) {
-                mimeType = 'video/mkv';
-                fileExtension = 'mkv';
-            }
-        }
-
-        var file = new File([recorder ? recorder.blob : ''], getFileName(fileExtension), {
-            type: mimeType
-        });
-
-        chrome.tabs.create({url: "app.html#/files/"+encodeURIComponent(url)+'/'+encodeURIComponent(file.name)}, function (tab) {     }); 
-
-        // invokeSaveAsDialog(file, file.name);
+        chrome.tabs.create({url: "app.html#/files/"+encodeURIComponent(url)+'/'+encodeURIComponent(fileName)}, function (tab) {     }); 
 
         setTimeout(function() {
             setDefaults();
-            // chrome.runtime.reload();            
         }, 1000);
 
         try {
