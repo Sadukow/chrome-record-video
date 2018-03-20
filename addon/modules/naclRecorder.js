@@ -10,21 +10,22 @@ var NACL_RECORDER = function(){
 	// ---------------------------
 	function initNacl(nmf, type, elem) {
 		function h() {
-			container.addEventListener("crash", j, true), 
-			container.addEventListener("message", k, true)
+			container.addEventListener("crash", _msg, true), 
+			container.addEventListener("message", _crsh, true)
 		}
 
 		function i() {
-			container.removeEventListener("message", k, true), 
-			container.removeEventListener("crash", j, true)
+			container.removeEventListener("message", _crsh, true), 
+			container.removeEventListener("crash", _msg, true)
 		}
 
-		function j() {
-			b.error("pnacl module crashed", r.lastError), q.onCrash && q.onCrash(r.lastError)
+		function _msg() {
+			b.error("pnacl module crashed", r.lastError), 
+			q.onCrash && q.onCrash(r.lastError)
 		}
 
-		function k(a) {
-			//console.log(a);
+		function _crsh(a) {
+			console.log('_crsh', a);
 			q.onMessage && q.onMessage(a)
 		}
 
@@ -87,24 +88,27 @@ var NACL_RECORDER = function(){
 		q  
 	}
 
-	function captureUseNacl(stream, filename) {
-
-		streamVideo = stream;
-		var audio = stream.getAudioTracks()[0];
-		var video = stream.getVideoTracks()[0];
+	function captureUseNacl(streams, filename) {
 
 		fileName = filename;
+		streamVideo = streams[0];
 
-		console.log('captureUseNacl', audio, video);
+		var data = {	filename:   "/html5_persistent/"+fileName,
+						audioTrack: streamVideo.getAudioTracks()[0],
+						videoTrack: streamVideo.getVideoTracks()[0]		};
+
+		if (streams.length == 2) {
+			data.camPosition = "bottomRight";
+			data.camTrack = streams[1].getVideoTracks()[0];
+		}
+
+
+		console.log('captureUseNacl', data);
 
 		nacl.load(function () {
 			nacl.postMessage({
 				type: 'start',
-				data: {
-					audioTrack: audio,
-					videoTrack: video,
-					filename:   "/html5_persistent/"+fileName
-				}
+				data: data
 			});
 		});
 	}

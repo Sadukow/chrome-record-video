@@ -139,23 +139,13 @@ function gotStream(stream) {
         // frame-rates
         options.frameInterval = 1;
 
-        Nacl.capture(stream, fileName);
+        Nacl.capture([stream, cameraStream], fileName);
 
-        //recorder = new MRecordRTC(stream);
-
-
-        //recorder.startRecording();
-
-        //recorder.streams = [stream, cameraStream];
     } 
     else {
-        //recorder = RecordRTC(stream, options);
-        //recorder.startRecording();
 
-        Nacl.capture(stream, fileName);
+        Nacl.capture([stream], fileName);
 
-
-        //recorder.streams = [stream];
     }
 
     //recorder.record();
