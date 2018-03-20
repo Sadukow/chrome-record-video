@@ -17,7 +17,7 @@
       "default_popup": "popup.html",
       "default_title": "Record Your Screen, Tab or Camera"
    },
-   "description": "Microphone + Screen + Camera - Screencastify",
+   "description": "Microphone + Screen + Camera",
    "icons": {
       "128": "images/main-icon.png",
       "16": "images/main-icon.png",
@@ -38,6 +38,6 @@
                      "identity" 
                   ],
    "short_name": "RecordVideo",
-   "version": "1.0.3"
+   "version": "1.0.4"
 }
 
