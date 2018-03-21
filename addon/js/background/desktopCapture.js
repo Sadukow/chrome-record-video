@@ -22,6 +22,30 @@ function captureDesktop() {
         path: 'images/main-icon.png'
     });
 
+    if (enableTabCaptureAPI) {
+
+        var constraints = {
+            audio:            true,
+            video:            true,
+            videoConstraints: {
+                mandatory: {
+                    chromeMediaSource: 'tab',
+                    maxWidth:          640,
+                    maxHeight:         480
+                }
+            }
+        };
+        
+        chrome.tabCapture.capture(constraints, function(stream){
+
+            initVideoPlayer(stream);
+            gotStream(stream);
+
+        });
+
+        return;
+    }
+
     var screenSources = ['screen', 'window', 'audio'];
 
     if (enableSpeakers === false) {
@@ -83,3 +107,4 @@ function onAccessApproved(chromeMediaSourceId, opts) {
         gotStream(stream);
     }, function() {});
 }
+

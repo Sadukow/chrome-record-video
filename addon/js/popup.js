@@ -71,4 +71,23 @@ window.addEventListener( "load", function(){
         });
     };
 
+    document.getElementById('selected-tab').onclick = function() {
+        chrome.storage.sync.set({
+            enableTabCaptureAPI: 'true', // TRUE
+            enableMicrophone: 'false',
+            enableCamera: 'false',
+            enableScreen: 'false',
+            isRecording: 'true', // TRUE
+            enableSpeakers: 'false'
+        }, function() {
+            runtimePort.postMessage({
+                messageFromContentScript1234: true,
+                startRecording: true
+            });
+            window.close();
+        });
+    };
+
+    
+
 }, false );

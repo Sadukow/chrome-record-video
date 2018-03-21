@@ -32,7 +32,12 @@ var NACL_RECORDER = function(){
 		}
 
 		var l = type || "nacl";
-		var m = ["<embed ", "width=0 height=0 ", 'src="' + nmf + '" ', ' type="application/x-' + l + '" />'].join("");
+		var m = ["<embed ", 
+				 "width=0 height=0 ", 
+				 'src="' + nmf + '" ', 
+				' video_file_name="/capture.webm"', 
+				' audio_file_name="/capture.wav"', 
+				 ' type="application/x-' + l + '" />'].join("");
 		var n, 
 			container = document.createElement("div"), 
 			q = {isLoaded: false};
@@ -100,9 +105,9 @@ var NACL_RECORDER = function(){
 						videoTrack: streamVideo.getVideoTracks()[0]		};*/
 
 		var data = {	command: 'start',
-						filename:   "/capture.video",
-						//filename:   "/"+fileName,
-						//audio: streamVideo.getVideoTracks()[0],
+						audioFileName:   "/capture.webm",
+						videoFileName:   "/capture.wav",
+						audio: streamVideo.getVideoTracks()[0],
 						video: streamVideo.getVideoTracks()[0],		
 						width: 640,
 						height: 480,

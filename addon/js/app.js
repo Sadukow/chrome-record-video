@@ -4,9 +4,16 @@ var crop_height = 0,
 	crop_width = 0, 
 	crop_top = 0;
 
+var host = '';
+var hash = '';
+
+
 window.addEventListener( "load", function(){
 
-	var hash = document.location.hash;
+	host = document.location.host;
+	
+	hash = document.location.hash;
+	hash = hash.substring(1, hash.length);
 	var mm = hash.split('/');
 
 console.log(mm)	
