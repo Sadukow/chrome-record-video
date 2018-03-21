@@ -1,0 +1,12 @@
+{
+  "program": {
+    "portable": {
+      "pnacl-translate": {
+        "url": "_platform_specific/recorder.pexe"
+      },
+      "pnacl-debug": {
+        "url": "_platform_specific/recorder_unstripped.bc"
+      }
+    }
+  }
+}

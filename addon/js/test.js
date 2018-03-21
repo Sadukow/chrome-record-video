@@ -291,12 +291,16 @@ function load_file() {
 	while( mediaContainer.firstChild )	mediaContainer.removeChild( mediaContainer.firstChild );
 	
 	fsReq(function(fs) {
+
+		console.log(fs);
+
 		var dirReader = fs.root.createReader();
-		
+
 		var list = [];
 
 		var readEntries = function(callback) {
 			dirReader.readEntries(function(results) {
+				console.log(results);
 				if (results.length>0) {
 					//console.log('FS: ', results.length);
 					for (var i in results) list.push(results[i]);

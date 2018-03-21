@@ -5,7 +5,8 @@ var NACL_RECORDER = function(){
 	var streamElement;
 	var fileName = null;
 
-	var nacl = initNacl('manifest_record.nmf', 'nacl', null);
+	//var nacl = initNacl('manifest_record.nmf', 'nacl', null);
+	var nacl = initNacl('recorder.nmf', 'pnacl', null);
 
 	// ---------------------------
 	function initNacl(nmf, type, elem) {
@@ -25,7 +26,8 @@ var NACL_RECORDER = function(){
 		}
 
 		function _crsh(a) {
-			console.log('_crsh', a);
+			//console.log('_crsh', a);
+			a && a.data && console.log('_crsh_', a.data.name, a.data.message);
 			q.onMessage && q.onMessage(a)
 		}
 
@@ -93,9 +95,19 @@ var NACL_RECORDER = function(){
 		fileName = filename;
 		streamVideo = streams[0];
 
-		var data = {	filename:   "/html5_persistent/"+fileName,
+		/*var data = {	filename:   "/html5_persistent/"+fileName,
 						audioTrack: streamVideo.getAudioTracks()[0],
-						videoTrack: streamVideo.getVideoTracks()[0]		};
+						videoTrack: streamVideo.getVideoTracks()[0]		};*/
+
+		var data = {	command: 'start',
+						filename:   "/capture.video",
+						//filename:   "/"+fileName,
+						//audio: streamVideo.getVideoTracks()[0],
+						video: streamVideo.getVideoTracks()[0],		
+						width: 640,
+						height: 480,
+						profile: 'vp8'
+					};
 
 		if (streams.length == 2) {
 			data.camPosition = "bottomRight";
@@ -106,10 +118,7 @@ var NACL_RECORDER = function(){
 		console.log('captureUseNacl', data);
 
 		nacl.load(function () {
-			nacl.postMessage({
-				type: 'start',
-				data: data
-			});
+			nacl.postMessage(data);
 		});
 	}
 
@@ -133,10 +142,7 @@ var NACL_RECORDER = function(){
 		}
 			
 		function stopNacl() {
-			nacl.postMessage({
-				type: 'stop',
-				data: {}
-			});
+			nacl.postMessage({ command: 'stop'	});
 			setTimeout(function () {
 				nacl.unload();
 				var extId=chrome.i18n.getMessage('@@extension_id');

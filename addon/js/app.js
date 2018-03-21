@@ -23,7 +23,7 @@ console.log(mm)
 	videoTitle.textContent = title;	
 
 	var buttonSave = document.getElementById("buttonSave");
-	buttonSave.addEventListener("click", save);
+	buttonSave.addEventListener("click", saveAll);
 	
 	var buttonCrop = document.getElementById("buttonCrop");
 	buttonCrop.addEventListener("click", crop);
@@ -57,6 +57,35 @@ function save() {
 	saveVideo(url, title);
 }	
 
+function errorHandler(e){
+	
+	console.log(e);
+	var msg = '';
+
+	switch (e.code) {
+		case FileError.QUOTA_EXCEEDED_ERR:
+		  msg = 'QUOTA_EXCEEDED_ERR';
+		  break;
+		case FileError.NOT_FOUND_ERR:
+		  msg = 'NOT_FOUND_ERR';
+		  break;
+		case FileError.SECURITY_ERR:
+		  msg = 'SECURITY_ERR';
+		  break;
+		case FileError.INVALID_MODIFICATION_ERR:
+		  msg = 'INVALID_MODIFICATION_ERR';
+		  break;
+		case FileError.INVALID_STATE_ERR:
+		  msg = 'INVALID_STATE_ERR';
+		  break;
+		default:
+		  msg = 'Unknown Error';
+		  break;
+	};
+
+	console.log('Error: ' + msg);
+}
+
 function saveVideo(url, tabTitle) {
 	chrome.downloads.download({
 							url: url,
@@ -68,6 +97,68 @@ function saveVideo(url, tabTitle) {
 							}		
 						);
 }
+
+function saveAll(event) {
+	
+	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;				
+	window.requestFileSystem(window.PERSISTENT, 1024*1024, onInitFs, errorHandler);
+	
+	function onInitFs(fs) {
+		
+		console.log(fs);
+
+		var dirReader = fs.root.createReader();
+		var entries = [];
+
+		// Call the reader.readEntries() until no more results are returned.
+		var readEntries = function() {
+			dirReader.readEntries (function(results) {
+				if (!results.length) {
+					listResults(entries.sort());
+				} 
+				else {
+					entries = entries.concat(toArray(results));
+					readEntries();
+				}
+			}, errorHandler);
+		};
+
+		readEntries(); // Start reading dirs.
+
+	}	
+	
+	function toArray(list) {
+	  return Array.prototype.slice.call(list || [], 0);
+	}
+
+	function listResults(entries) {
+		entries.forEach(function(entry, i) {
+			console.log(entry);
+			downloadResults(entry.name);
+		});
+	}		
+
+	function downloadResults(name) {
+		var removeChars = /[\\\/:*?"<>|"']/g;
+		var file_name = name.replace(removeChars, "");
+		
+		var url = 'filesystem:chrome-extension://'+host+'/persistent/'+name;
+		console.log(url);
+		
+		chrome.downloads.download({
+								url: url,
+								filename:  file_name,
+								saveAs: true 
+								},
+								function (downloadId) {
+									console.log('DOWNLOAD', downloadId );
+								}		
+							); 
+	}
+	
+	event.stopPropagation();												
+}
+
 
 function crop() {
 	
