@@ -27,7 +27,11 @@ var NACL_RECORDER = function(){
 
 		function _crsh(a) {
 			//console.log('_crsh', a);
-			a && a.data && console.log('_crsh_', a.data.name, a.data.message);
+			if (a && a.data) { 
+				if (a.data.message) console.log('_crsh_', a.data.name, a.data.message);
+				else if (a.data.value) console.log('_crsh_', a.data.name, a.data.value);
+				else  console.log(a);
+			}	
 			q.onMessage && q.onMessage(a)
 		}
 
@@ -35,8 +39,6 @@ var NACL_RECORDER = function(){
 		var m = ["<embed ", 
 				 "width=0 height=0 ", 
 				 'src="' + nmf + '" ', 
-				' video_file_name="/capture.webm"', 
-				' audio_file_name="/capture.wav"', 
 				 ' type="application/x-' + l + '" />'].join("");
 		var n, 
 			container = document.createElement("div"), 
@@ -107,7 +109,7 @@ var NACL_RECORDER = function(){
 		var data = {	command: 'start',
 						audioFileName:   "/capture.webm",
 						videoFileName:   "/capture.wav",
-						audio: streamVideo.getVideoTracks()[0],
+						audio: streamVideo.getAudioTracks()[0],
 						video: streamVideo.getVideoTracks()[0],		
 						width: 640,
 						height: 480,

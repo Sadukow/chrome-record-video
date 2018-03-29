@@ -1,0 +1,99 @@
+# Updated by fix_deps.py
+pnacl/Release/video_encode.o: video_encode.cc \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_errors.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_macros.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_console.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_bool.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_instance.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_stdint.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_var.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/input_event.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_input_event.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_point.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_resource.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_time.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_touch_point.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/resource.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/instance_handle.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/pass_ref.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/touch_point.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/point.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/instance.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/view.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/rect.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_rect.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_size.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/size.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/logging.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/media_stream_video_track.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_media_stream_video_track.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_completion_callback.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/module.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_module.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_core.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/core.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_array_buffer.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_dictionary.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_array.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/video_encoder.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_codecs.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/completion_callback.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/output_traits.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/array_output.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_array_output.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/video_frame.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_video_frame.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/completion_callback_factory.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/completion_callback_factory_thread_traits.h \
+  /home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/threading/lock.h
+video_encode.cc:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_errors.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_macros.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_console.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_bool.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_instance.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_stdint.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_var.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/input_event.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_input_event.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_point.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_resource.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_time.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_touch_point.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/resource.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/instance_handle.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/pass_ref.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/touch_point.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/point.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/instance.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/view.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/rect.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_rect.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_size.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/size.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/logging.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/media_stream_video_track.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_media_stream_video_track.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_completion_callback.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/module.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_module.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_core.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/core.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_array_buffer.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_dictionary.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/var_array.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/video_encoder.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_codecs.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/completion_callback.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/output_traits.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/array_output.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/pp_array_output.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/cpp/video_frame.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/c/ppb_video_frame.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/completion_callback_factory.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/completion_callback_factory_thread_traits.h:
+/home/saduk/nacl_sdk/pepper_49/include/ppapi/utility/threading/lock.h:

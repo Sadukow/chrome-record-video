@@ -167,7 +167,7 @@ function stopScreenRecording() {
 
     Nacl.stop(function(url, fn){
 
-        chrome.tabs.create({url: "app.html#/files/"+encodeURIComponent(url)+'/'+encodeURIComponent(fileName)}, function (tab) {     }); 
+//----        chrome.tabs.create({url: "app.html#/files/"+encodeURIComponent(url)+'/'+encodeURIComponent(fileName)}, function (tab) {     }); 
 
         setTimeout(function() {
             setDefaults();
